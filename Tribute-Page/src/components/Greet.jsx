@@ -10,4 +10,4 @@ const Greet = (props) => {
     )
 }
 
-export default Greet
+export default Greet     

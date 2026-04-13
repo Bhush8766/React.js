@@ -1,0 +1,18 @@
+.productHeading {
+  color: pink;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.paraDef {
+  text-align: justify;
+  width: 50%;
+  margin: 20px auto;
+}
+
+.phoneImg {
+  border: 1px solid pink;
+  border-radius: 15px;
+  width: 300px;
+}

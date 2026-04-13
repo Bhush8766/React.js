@@ -29,13 +29,13 @@ function App() {
 
       <Product />
 
-      <Greet user='Bhushan' session={5}/>
-    <Greet user='Nandini' session={5}/>
-    <Greet user='Vedant' session={5}/>
-    <Greet user='Sagar' session={5}/>
+      <Greet user='Bhushan' session={10}/>
+    <Greet user='Nandini' session={10}/>
+    <Greet user='Vedant' session={9}/>
+    <Greet user='Sagar' session={10}/>
     </>
   )
 }
 
-export default App
-      
+export default App   
+                      

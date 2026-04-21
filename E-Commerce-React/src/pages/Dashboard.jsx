@@ -1,11 +1,15 @@
 import React from 'react'
 
-const Dashboard = ({loggedUser}) => {
-    console.log("Dashboard",loggedUser)
+const Dashboard = ({ loggedUser }) => {
+
+  if (!loggedUser) {
+    return <h2>Please login first</h2>
+  }
+
   return (
-    <>
-    <div> Welcome ; {loggedUser.userName}  to my Dashboard</div>
-    </>
+    <div>
+      Welcome {loggedUser.userName} 🎉
+    </div>
   )
 }
 

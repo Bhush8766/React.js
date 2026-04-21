@@ -3,7 +3,7 @@ import React from 'react'
 const Dashboard = ({ loggedUser }) => {
 
   if (!loggedUser) {
-    return <h2>Please login first</h2>
+    return <h2>Dashboard </h2>
   }
 
   return (

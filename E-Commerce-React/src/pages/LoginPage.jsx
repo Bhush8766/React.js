@@ -1,88 +1,92 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast, Bounce } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
-const LoginPage = () => {
+const LoginPage = ({setLoggedUSer}) => {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const [regUser, setRegUser] = useState({})
 
-  const navigate = useNavigate()
+    const navigate = useNavigate()
 
-  function handleLogin(e) {
-    e.preventDefault()
 
-    if (!email || !password) {
-      toast.warning("Please fill all fields")
-      return
+
+    function handleLogin(e) {
+        e.preventDefault()
+        console.log(email, password, "************")
+        console.log(regUser,"regUser in login")
+        if (email == regUser.email && password == regUser.password) {
+            console.log(regUser)
+            setLoggedUSer(regUser)
+            toast.success("Login successfully")
+            navigate('/dashboard',)
+        } else {
+            toast.error("invalid credentials", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            })
+            navigate('/')
+        }
     }
 
-    if (email === "bhush@gmail.com" && password === "123456") {
-      toast.success("Login successfully")
+function fetchData(){
+      const regUser1 = JSON.parse(localStorage.getItem("user81"))
+        setRegUser(regUser1)
+}
 
-      localStorage.setItem("user", email)
 
-      setTimeout(() => {
-        navigate('/dashboard')
-      }, 1000)
+    useEffect(()=>{
+  fetchData()
+    },[])
 
-    } else {
-      toast.error("Invalid Credentials")
-    }
-  }
-        
-  return (
-    <div className='container w-50 p-5 mt-5 bg-info rounded shadow'>
-      <h3 className="text-white text-center mb-4">Login here...</h3>
 
-      <form onSubmit={handleLogin}>
+        console.log("**************REG USER*********",regUser)
 
-        <div className="form-floating mb-3">
-          <input
-            type="email"
-            className="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="floatingInput">Email address</label>
+
+    return (
+        <div className='container w-50 p-5 mt-5 bg-info rounded'>
+            <h3>Login here...</h3>
+            <form onSubmit={handleLogin}>
+                <div className="form-floating mb-3">
+                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
+                        // value="Jerry" 
+                        // name={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <label htmlFor="floatingInput">Email address</label>
+                </div>
+                <div className="form-floating mb-5">
+                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <label htmlFor="floatingPassword">Password</label>
+                </div>
+
+                <button type="submit" className="btn btn-primary">Login</button>
+                <Link to='/register' >If not registered</Link>
+            </form>
+
+            <ToastContainer position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                transition={Bounce} />
         </div>
-
-        <div className="form-floating mb-4">
-          <input
-            type="password"
-            className="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label htmlFor="floatingPassword">Password</label>
-        </div>
-
-        <button type="submit" className="btn btn-primary w-100">
-          Login
-        </button>
-
-        <p className="mt-3 text-center">
-          <Link to="/register" className="text-white">
-            If not registered?
-          </Link>
-        </p>
-
-      </form>
-
-      {/* Toast Container */}
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        theme="colored"
-        transition={Bounce}
-      />
-    </div>
-  )
+    )
 }
 
 export default LoginPage

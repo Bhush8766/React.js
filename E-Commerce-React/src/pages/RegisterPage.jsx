@@ -1,100 +1,60 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast, Bounce } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { Link } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
 
 const RegisterPage = () => {
+    const [name,setName] =useState()
+    const [email,setEmail] = useState()
+    const [password,setPassword] = useState()
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+    const handleRegister = (e) =>{
+        e.preventDefault()
+        const regUser = {
+            userName:name,
+            email:email,
+            password:password
+        }
 
-  const navigate = useNavigate()
-
-  function handleRegister(e) {
-    e.preventDefault()
-
-    // ✅ Validation
-    if (!name || !email || !password) {
-      toast.warning("Please fill all fields")
-      return
+        localStorage.setItem('user81', JSON.stringify(regUser))
+        toast.success("Register successful")
     }
 
-    // ✅ Save user (localStorage for demo)
-    const user = { name, email, password }
-    localStorage.setItem("userData", JSON.stringify(user))
 
-    toast.success("Registered successfully 🎉")
-
-    // Redirect to login
-    setTimeout(() => {
-      navigate('/')
-    }, 1500)
-  }
 
   return (
-    <div className='container w-50 p-5 mt-5 bg-success rounded shadow'>
-      <h3 className="text-white text-center mb-4">Register here...</h3>
+     <div className='container w-50 p-5 mt-5 bg-info rounded'>
+            <h3>Register here...</h3>
+            <form onSubmit={handleRegister}>
+                          <div className="form-floating mb-3">
+                    <input type="text" className="form-control" id="floatingInputName" placeholder=""
+                        // value="Jerry" 
+                        // name={userName}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <label htmlFor="floatingInputName">
+                        User Name
+                    </label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"
+                        // value="Jerry" 
+                        // name={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <label htmlFor="floatingInput">Email address</label>
+                </div>
+                <div className="form-floating mb-5">
+                    <input type="password" className="form-control" id="floatingPassword" placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <label htmlFor="floatingPassword">Password</label>
+                </div>
 
-      <form onSubmit={handleRegister}>
-
-        <div className="form-floating mb-3">
-          <input
-            type="text"
-            className="form-control"
-            id="floatingName"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label htmlFor="floatingName">Full Name</label>
-        </div>
-
-        <div className="form-floating mb-3">
-          <input
-            type="email"
-            className="form-control"
-            id="floatingEmail"
-            placeholder="name@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label htmlFor="floatingEmail">Email address</label>
-        </div>
-
-        <div className="form-floating mb-4">
-          <input
-            type="password"
-            className="form-control"
-            id="floatingPassword"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label htmlFor="floatingPassword">Password</label>
-        </div>
-
-        <button type="submit" className="btn btn-light w-100">
-          Register
-        </button>
-
-        <p className="mt-3 text-center text-white">
-          Already have an account?{' '}
-          <Link to="/" className="text-warning">
-            Login here
-          </Link>
-        </p>
-
-      </form>
-
-      {/* Toast */}
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        theme="colored"
-        transition={Bounce}
-      />
-    </div>
+                <button type="submit" className="btn btn-primary">Register</button>
+                <Link to='/' >already registered</Link>
+            </form>
+            <ToastContainer />
+            </div>
   )
 }
 

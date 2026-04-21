@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Dashboard = () => {
+const Dashboard = ({loggedUser}) => {
+    console.log("Dashboard",loggedUser)
   return (
-    <div>Dashboard</div>
+    <>
+    <div> Welcome ; {loggedUser.userName}  to my Dashboard</div>
+    </>
   )
 }
 

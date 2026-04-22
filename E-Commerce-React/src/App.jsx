@@ -1,20 +1,25 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import Dashboard from './pages/Dashboard'
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const App = () => {
-   const user = {
-    userName: "Bhushan"
-  };
+
+    const [loggedUser, setLoggedUSer] = useState()
+
+
   return (
+
     <BrowserRouter>
       <Routes>
-          <Route path='/' element={<LoginPage />}></Route>
-          <Route path='/register' element={<RegisterPage />}></Route>
-          <Route path='/dashboard' element={<Dashboard loggedUser={user}/>}></Route>
+
+      <Route path='/' element={<LoginPage setLoggedUSer={setLoggedUSer}/>}></Route>
+      <Route path ='/register' element={<RegisterPage />}></Route>
+      <Route path='/dashboard' element={<Dashboard loggedUser={loggedUser}/>}></Route>
+
       </Routes>
     </BrowserRouter>
   )

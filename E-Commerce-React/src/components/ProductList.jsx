@@ -24,7 +24,7 @@ const ProductList = () => {
       <h2 className="mb-4">Product List</h2>
 
       {loading ? (
-        <h4>Loading...</h4>
+        <h4>Loading...</h4>   
       ) : (
         <div className="row">
           {products.map((item) => (

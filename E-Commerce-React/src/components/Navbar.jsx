@@ -30,7 +30,7 @@ const Navbar = ({ loggedUser }) => {
               Welcome, {loggedUser?.userName || "Guest"}
             </i>
 
-            <span>
+            <span>   
               <FaShoppingCart />
               <sup className="badge bg-danger ms-2">0</sup>
             </span>

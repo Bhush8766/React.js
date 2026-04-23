@@ -27,7 +27,7 @@ const Navbar = ({ loggedUser }) => {
 
           <div className="d-flex">
             <i className="me-4">
-              Welcome, {loggedUser?.userName || "Guest"}
+              Welcome, {loggedUser?.userName || "Guest"}   
             </i>
 
             <span>   
